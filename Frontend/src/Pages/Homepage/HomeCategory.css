@@ -1,0 +1,49 @@
+.contentWidth {
+  width: 77%;
+}
+
+.category {
+  width: 23%;
+  height: 410px;
+  border-radius: 5px;
+  margin-top: 10px;
+  margin-right: 990px;
+}
+
+.category img {
+  width: 30px;
+  height: 30px;
+  margin-top: 10px;
+  object-fit: contain;
+}
+
+.category span {
+  margin: 10px 20px;
+  color: rebeccapurple;
+  text-transform: capitalize;
+}
+
+.category .box {
+  transition: 0.5s;
+  padding: 0 20px;
+  margin-top: 10px;
+  margin-right: 0px;
+}
+
+.category .box:hover {
+  background-color: #ffe1ef;
+  cursor: default;
+}
+
+.info {
+  font-size: larger;
+  margin: 20px;
+  text-decoration: none;
+  text-transform: uppercase;
+  padding-left: 20px;
+  font-weight: 600;
+}
+
+.info:hover {
+  color: crimson;
+}
