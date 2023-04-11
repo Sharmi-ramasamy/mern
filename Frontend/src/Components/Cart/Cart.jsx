@@ -45,7 +45,7 @@ export const Cart = () => {
       desc: productItem.desc,
       image: productItem.image,
       email: sessionStorage.getItem("email"),
-      quantity: productItem.quantity == 1 ? 1 : productItem.quantity - 1,
+      quantity: productItem.quantity === 1 ? 1 : productItem.quantity - 1,
       value: productItem.price,
     });
     setTimeout(() => {
@@ -94,7 +94,7 @@ export const Cart = () => {
         <div>
           {getProduct
             .filter((e) => {
-              if (sessionStorage.getItem("email") == e.email) {
+              if (sessionStorage.getItem("email") === e.email) {
                 return e;
               }
             })
