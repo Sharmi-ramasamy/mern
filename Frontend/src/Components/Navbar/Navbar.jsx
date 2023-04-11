@@ -29,6 +29,9 @@ export const Navbar = (productItem) => {
 
       <div className="headers-links">
         <ul>
+        <li>
+        <button id='back-btn' onClick={() => navigate(-1)}>Back</button> 
+          </li>
           <li>
             <Link to="/"> Home </Link>
           </li>

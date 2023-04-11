@@ -1,4 +1,3 @@
-/* eslint-disable no-undef */
 module.exports = (app) => {
     const cart = require("../controllers/cart.controller.js");
     var router = require("express").Router();

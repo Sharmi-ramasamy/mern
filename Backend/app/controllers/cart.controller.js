@@ -1,5 +1,3 @@
-/* eslint-disable no-unused-vars */
-/* eslint-disable no-undef */
 const db = require("../models");
 const Cart = db.cart;
 
@@ -60,7 +58,7 @@ exports.findOne = (req, res) => {
 exports.update = (req, res) => {
   if (!req.body) {
     return res.status(400).send({
-      message: "Data to update can not be empty!",
+      message: "Data to update cannot be empty!",
     });
   }
 
@@ -70,7 +68,7 @@ exports.update = (req, res) => {
     .then((data) => {
       if (!data) {
         res.status(404).send({
-          message: `Cannot update cart with id=${id}. Maybe Tutorial was not found!`,
+          message: `Cannot update cart with id=${id}. Maybe cart was not found!`,
         });
       } else res.send({ message: "Cart was updated successfully." });
     })

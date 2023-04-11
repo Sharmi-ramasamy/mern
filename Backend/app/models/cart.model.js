@@ -1,4 +1,3 @@
-/* eslint-disable no-undef */
 module.exports = (mongoose) => {
     const Cart = mongoose.model(
       "cart",

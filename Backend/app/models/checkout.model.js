@@ -1,4 +1,3 @@
-/* eslint-disable no-undef */
 module.exports = (mongoose) => {
     const Checkout = mongoose.model(
       "checkout",

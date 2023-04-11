@@ -1,4 +1,3 @@
-/* eslint-disable no-undef */
 module.exports = (app) => {
     const checkout = require("../controllers/checkout.controller.js");
   

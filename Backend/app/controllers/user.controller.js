@@ -1,5 +1,4 @@
-/* eslint-disable no-unused-vars */
-/* eslint-disable no-undef */
+const { user } = require("../models");
 const db = require("../models");
 const User = db.user;
 
@@ -55,7 +54,7 @@ exports.findOne = (req, res) => {
 exports.update = (req, res) => {
   if (!req.body) {
     return res.status(400).send({
-      message: "Data to update can not be empty!",
+      message: "Data to update cannot be empty!",
     });
   }
 
@@ -112,14 +111,13 @@ exports.deleteAll = (req, res) => {
     });
 };
 
-exports.findAllPublished = (req, res) => {
-  User.find({ published: true })
-    .then((data) => {
-      res.send(data);
-    })
-    .catch((err) => {
-      res.status(500).send({
-        message: err.message || "Some error occurred while retrieving user.",
-      });
-    });
-};
+exports.findByUsername = async (req,res) =>{
+  const {email, password} = req.query;
+  const validUser = await User.findOne({email,password});
+  if(validUser)
+  {
+    const userDetails = await User.find({email,password});
+    return res.json({valid:true,...userDetails});
+  }
+  return res.json({valid:false});
+}

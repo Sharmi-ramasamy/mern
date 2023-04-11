@@ -30,23 +30,39 @@ export default function Login() {
     CheckPassword();
     if (EmailValid(userEmail) && PasswordValid(userPassword)) {
       ecomUrl
-        .get("user?email=" + userEmail)
+        // .get("user?email=" + userEmail)
+        .post(`/user/login?email=${userEmail}&password=${userPassword}`)
         .then((res) => {
-          if (res.data[0].email === userEmail && res.data[0].password === userPassword) {
+          console.log(res.data);
+          if (res.data.valid) {
             sessionStorage.setItem("id", res.data[0]._id);
             sessionStorage.setItem("email", res.data[0].email);
             Toast("Login Successful", "success");
             navigate("/");
             // } else if (res.data[0].email !== userEmail) {
             //   setErrors("Enter the Correct Email");
-          } else if (res.data[0].password !== userPassword) {
+          } 
+          else if (res.data[0].password !== userPassword) {
             Toast("Invalid Password", "error");
           }
+
+
+
+          // if (res.data[0].email === userEmail && res.data[0].password === userPassword) {
+          //   sessionStorage.setItem("id", res.data[0]._id);
+          //   sessionStorage.setItem("email", res.data[0].email);
+          //   Toast("Login Successful", "success");
+          //   navigate("/");
+          //   // } else if (res.data[0].email !== userEmail) {
+          //   //   setErrors("Enter the Correct Email");
+          // } else if (res.data[0].password !== userPassword) {
+          //   Toast("Invalid Password", "error");
+          // }
+
+
         })
         .catch((err) => {
           Toast("Invalid Email", "error", err);
-          // console.log(err);
-          // setErrors("Enter the Correct Email", err);
         });
     }
   };

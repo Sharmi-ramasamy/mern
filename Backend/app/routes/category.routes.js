@@ -1,4 +1,3 @@
-/* eslint-disable no-undef */
 module.exports = (app) => {
   const category = require("../controllers/category.controller.js");
   var router = require("express").Router();
