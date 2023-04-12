@@ -48,11 +48,6 @@ export const Signup = () => {
   const adduser = (e) => {
     e.preventDefault();
     if (validateForm(email, password, name)) {
-      // ecomUrl.get("user?email=" + email).then((res) => {
-      //   if (res.data[0].email == email) {
-      //     alert("Email Exists");
-      //   }
-      // });
       return;
     } else {
       const user = { name, email, password };

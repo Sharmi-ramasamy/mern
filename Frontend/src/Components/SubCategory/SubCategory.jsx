@@ -1,5 +1,3 @@
-/* eslint-disable eqeqeq */
-/* eslint-disable array-callback-return */
 import React from "react";
 import "./SubCategory.css";
 import { useState, useEffect } from "react";
@@ -46,7 +44,7 @@ export const SubCategory = () => {
         <div>
           {items
             .filter((categoryItem) => {
-              if (categoryName == categoryItem.category) {
+              if (categoryName === categoryItem.category) {
                 return categoryItem;
               }
             })

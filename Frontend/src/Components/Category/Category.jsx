@@ -7,7 +7,6 @@ import { Link } from "react-router-dom";
 
 export const Category = () => {
   const [items, setItems] = useState();
-  // const navigate = useNavigate();
   const params = useParams();
   useEffect(() => {
     ecomUrl.get("category").then((response) => {
@@ -25,24 +24,6 @@ export const Category = () => {
                 <Link to={`/category/${categoryItem.name}`}>
                   <img src={categoryItem.image} alt="" className="product-image" />
                 </Link>
-
-                {/* <img
-                  className="product-image"
-                  onClick={() => navigate(`/category/${categoryItem.name}`)}
-                  src={categoryItem.image}
-                  alt={categoryItem.name}
-                /> */}
-
-                {/* <a
-                  href={`/category/${categoryItem.name}`}
-                  target="_self"
-                  // className="product-image"
-                  // onClick={() => navigate(`/category/${categoryItem.name}`)}
-                  // src={categoryItem.image}
-                  alt={categoryItem.name}
-                >
-                  <img className="product-image" src={categoryItem.image}></img>
-                </a> */}
               </div>
 
               <div>

@@ -6,6 +6,7 @@ export const Error = () => {
       <img
         className="images"
         src="https://miro.medium.com/max/800/1*hFwwQAW45673VGKrMPE2qQ.png"
+        alt="page not found - 404"
         style={{ height: "700px", width: "100%" }}
       ></img>
     </div>

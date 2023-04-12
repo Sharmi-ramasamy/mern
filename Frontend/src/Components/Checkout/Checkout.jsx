@@ -26,27 +26,22 @@ export const Checkout = () => {
   const [validZip, setValidZip] = useState("");
   const navigate = useNavigate();
   const validateForm = (email, name, address, state, city, zip) => {
-    if ((name == null) | (name == "")) {
+    if ((name == null) | (name === "")) {
       setNameError(" * Please enter your name");
-      // return true;
     }
-    if ((email == null) | (email == "")) {
+    if ((email == null) | (email === "")) {
       setEmailError(" * Please enter your email");
-      // return true;
     }
-    if ((address == null) | (address == "")) {
+    if ((address == null) | (address === "")) {
       setAddressError(" * Please enter your address");
-      // return true;
     }
-    if ((city == null) | (city == "")) {
+    if ((city == null) | (city === "")) {
       setCityError(" * Please enter your city");
-      // return true;
     }
-    if ((state == null) | (state == "")) {
+    if ((state == null) | (state === "")) {
       setStateError(" * Please enter your state");
-      // return true;
     }
-    if ((zip == null) | (zip == "")) {
+    if ((zip == null) | (zip === "")) {
       setZipError(" * Please enter your zipcode");
       return true;
     } else if (!name.match(/^[a-zA-Z]{3,}$/)) {

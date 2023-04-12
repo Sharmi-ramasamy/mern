@@ -30,7 +30,6 @@ export default function Login() {
     CheckPassword();
     if (EmailValid(userEmail) && PasswordValid(userPassword)) {
       ecomUrl
-        // .get("user?email=" + userEmail)
         .post(`/user/login?email=${userEmail}&password=${userPassword}`)
         .then((res) => {
           console.log(res.data);
@@ -39,27 +38,10 @@ export default function Login() {
             sessionStorage.setItem("email", res.data[0].email);
             Toast("Login Successful", "success");
             navigate("/");
-            // } else if (res.data[0].email !== userEmail) {
-            //   setErrors("Enter the Correct Email");
           } 
           else if (res.data[0].password !== userPassword) {
             Toast("Invalid Password", "error");
           }
-
-
-
-          // if (res.data[0].email === userEmail && res.data[0].password === userPassword) {
-          //   sessionStorage.setItem("id", res.data[0]._id);
-          //   sessionStorage.setItem("email", res.data[0].email);
-          //   Toast("Login Successful", "success");
-          //   navigate("/");
-          //   // } else if (res.data[0].email !== userEmail) {
-          //   //   setErrors("Enter the Correct Email");
-          // } else if (res.data[0].password !== userPassword) {
-          //   Toast("Invalid Password", "error");
-          // }
-
-
         })
         .catch((err) => {
           Toast("Invalid Email", "error", err);

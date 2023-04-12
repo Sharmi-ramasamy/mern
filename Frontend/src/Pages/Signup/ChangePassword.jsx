@@ -7,16 +7,11 @@ import Toast from "../../Components/Toast/Toast";
 
 export const ChangePassword = () => {
   const userId = sessionStorage.getItem("id");
-  // const [name, setName] = useState();
-  // const [nameError, setNameError] = useState();
   const [email, setEmail] = useState();
   const [newPassword, setNewPassword] = useState("");
   const [newPasswordError, setNewPasswordError] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [confirmPasswordError, setConfirmPasswordError] = useState("");
-  // eslint-disable-next-line no-unused-vars
-  // const [regError, setregError] = useState(null);
-  // const [nameValid, setNameValid] = useState("");
   const [newPasswordValid, setNewPasswordValid] = useState("");
   const navigate = useNavigate();
   const [confirmPasswordValid, setConfirmPasswordValid] = useState("");
@@ -35,20 +30,12 @@ export const ChangePassword = () => {
 
   const changepassword = (e) => {
     e.preventDefault();
-    // if ((name == null) | (name == "")) {
-    //   setNameError(" * Please enter your name");
-    //   // return true;
-    // }
     if ((newPassword == null) | (newPassword === "")) {
       setNewPasswordError(" * Please enter new password");
-      // return true;
     }
     if ((confirmPassword == null) | (confirmPassword === "")) {
       setConfirmPasswordError(" * Re-Enter the New Password");
       return true;
-      // } else if (!name.match(/^[a-zA-Z]{8,20}$/)) {
-      //   setNameValid("UserName should contain 8-20 Characters with lowercase,uppercase or combination of it");
-      //   return true;
     } else if (!newPassword.match(/^(?=.*[0-9])(?=.*[!@#$%*])(?=.*[A-Z])([a-zA-Z0-9!@#$%*]{9,20})$/)) {
       setNewPasswordValid(
         "Password should have minimum 9-20 characters with combination of uppercase, lowercase ,numbers and a special character '!@#$%*' "
@@ -69,31 +56,12 @@ export const ChangePassword = () => {
     } else {
       Toast("New Password and Confirm Password Does not Match. Re-Enter it Correctly", "error");
     }
-    // } else if {
-    //   setregError(
-    //     "Password should have minimum 9 characters with combination of uppercase, lowercase ,numbers and a special character '!@#$%*' "
-    //   );
-    // }
   };
 
   return (
     <div className="change-box">
       <h3> Change Password </h3>
       <form onSubmit={changepassword}>
-        {/* <label>Name</label>
-        <input
-          type="text"
-          placeholder="Enter Name"
-          data-testid="name-test"
-          onChange={(e) => {
-            setName(e.target.value);
-          }}
-          onClick={(e) => {
-            e.target.focus(setNameError(null), setNameValid(null));
-          }}
-        />
-        <strong className="error-msg"> {nameError} </strong>
-        <strong className="error-msg"> {nameValid} </strong> */}
         <label>New Password</label>
         <input
           type={shows ? "text" : "password"}
@@ -110,7 +78,6 @@ export const ChangePassword = () => {
         <p onClick={() => setShows((prestate) => !prestate)}>
           <i className="fa fa-eye fa-fw" id="togglePassword" aria-hidden="true"></i>
         </p>
-        {/* <strong className="error-msg">{regError && <p>{regError}</p>}</strong> */}
         <strong className="error-msg"> {newPasswordError} </strong>
         <strong className="error-msg"> {newPasswordValid} </strong>
         <label>Confirm Password</label>
@@ -129,7 +96,6 @@ export const ChangePassword = () => {
         <p onClick={() => setShow((prestate) => !prestate)}>
           <i className="fa fa-eye fa-fw" id="togglePassword" aria-hidden="true"></i>
         </p>
-        {/* <strong className="error-msg">{regError && <p>{regError}</p>}</strong> */}
         <strong className="error-msg"> {confirmPasswordError} </strong>
         <strong className="error-msg"> {confirmPasswordValid} </strong>
         <input type="submit" value="Save Changes" className="button"></input>
