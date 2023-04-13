@@ -30,7 +30,7 @@ db.mongoose
   });
 // simple route
 app.get("/", (req, res) => {
-  res.json({ message: "Welcome to bezkoder application." });
+  res.json({ message: "Welcome to Ecommerce application." });
 });
 require("./app/routes/category.routes")(app)
 require("./app/routes/subcategory.routes")(app)

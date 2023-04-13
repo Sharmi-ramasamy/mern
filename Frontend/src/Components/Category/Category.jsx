@@ -9,7 +9,7 @@ export const Category = () => {
   const [items, setItems] = useState();
   const params = useParams();
   useEffect(() => {
-    ecomUrl.get("category").then((response) => {
+    ecomUrl.get("/category").then((response) => {
       setItems(response.data);
     });
   }, [params]);

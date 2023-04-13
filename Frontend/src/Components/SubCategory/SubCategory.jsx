@@ -60,7 +60,7 @@ export const SubCategory = () => {
         <div className="products">
           {getproduct
             .filter((subcategoryitem) => {
-              if (subcat == subcategoryitem.SubCategory) {
+              if (subcat === subcategoryitem.SubCategory) {
                 return subcategoryitem;
               }
             })
