@@ -13,7 +13,7 @@ exports.create = (req, res) => {
 
   checkout
     .save(checkout)
-    .then((data) => {
+    .thenz((data) => {
       res.send(data);
     })
     .catch((err) => {
@@ -24,10 +24,7 @@ exports.create = (req, res) => {
 };
 
 exports.findAll = (req, res) => {
-  const title = req.query.title;
-  var condition = title ? { title: { $regex: new RegExp(title), $options: "i" } } : {};
-
-  Checkout.find(condition)
+    Checkout.find()
     .then((data) => {
       res.send(data);
     })

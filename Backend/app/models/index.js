@@ -1,11 +1,10 @@
-const dbConfig = require("../config/db.config.js");
-
+// const dbConfig = require("../config/db.config.js");
 const mongoose = require("mongoose");
 mongoose.Promise = global.Promise;
 
 const db = {};
 db.mongoose = mongoose;
-db.url = dbConfig.url;
+db.url = process.env.MONGO_URL
 db.category = require("./category.model.js")(mongoose);
 db.subcategory = require("./subcategory.model.js")(mongoose);
 db.product = require("./product.model.js")(mongoose);

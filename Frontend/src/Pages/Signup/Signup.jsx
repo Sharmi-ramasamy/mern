@@ -19,13 +19,13 @@ export const Signup = () => {
   const [passwordValid, setPasswordValid] = useState("");
   const navigate = useNavigate();
   const validateForm = (email, password, name) => {
-    if ((name == null) | (name == "")) {
+    if ((name == null) | (name === "")) {
       setNameError(" * Please enter your name");
     }
-    if ((email == null) | (email == "")) {
+    if ((email == null) | (email === "")) {
       setEmailError(" * Please enter your email");
     }
-    if ((password == null) | (password == "")) {
+    if ((password == null) | (password === "")) {
       setPasswordError(" * Please fill the password field");
       return true;
     } else if (!name.match(/^[a-zA-Z]{3,}$/)) {
@@ -53,7 +53,7 @@ export const Signup = () => {
       const user = { name, email, password };
       Toast("Signup Successful", "success");
       ecomUrl
-        .post("user", user)
+        .post("/user", user)
         .then(() => {
           navigate("/login");
         })

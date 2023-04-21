@@ -1,4 +1,3 @@
-/* eslint-disable no-undef */
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "../Signup/Form.css";
@@ -30,23 +29,51 @@ export default function Login() {
     CheckPassword();
     if (EmailValid(userEmail) && PasswordValid(userPassword)) {
       ecomUrl
-        .post(`/user/login?email=${userEmail}&password=${userPassword}`)
+        .post(`/user/log`,{email:userEmail,password:userPassword})
         .then((res) => {
           console.log(res.data);
-          if (res.data.valid) {
-            sessionStorage.setItem("id", res.data[0]._id);
-            sessionStorage.setItem("email", res.data[0].email);
+          if (res.data) {
+            sessionStorage.setItem("token", res.data.token);
+            sessionStorage.setItem("id", res.data._id);
+            sessionStorage.setItem("email", res.data.email);
             Toast("Login Successful", "success");
             navigate("/");
           } 
-          else if (res.data[0].password !== userPassword) {
+          else if (res.data.password !== userPassword) {
             Toast("Invalid Password", "error");
+          }
+          else if (res.data.email !== userEmail) {
+            Toast("Invalid Email", "error");
           }
         })
         .catch((err) => {
-          Toast("Invalid Email", "error", err);
+          Toast("Invalid Data", "error", err);
         });
     }
+
+
+    // if (EmailValid(userEmail) && PasswordValid(userPassword)) {
+    //   ecomUrl
+    //     .post(`/user/login?email=${userEmail}&password=${userPassword}`)
+    //     .then((res) => {
+    //       console.log(res.data);
+    //       if (res.data.valid) {
+    //         sessionStorage.setItem("id", res.data[0]._id);
+    //         sessionStorage.setItem("email", res.data[0].email);
+    //         Toast("Login Successful", "success");
+    //         navigate("/");
+    //       } 
+    //       else if (res.data[0].password !== userPassword) {
+    //         Toast("Invalid Password", "error");
+    //       }
+    //       else if (res.data.email !== userEmail) {
+    //         Toast("Invalid Email", "error");
+    //       }
+    //     })
+    //     .catch((err) => {
+    //       Toast("Server Problem...!!", "error", err);
+    //     });
+    // }
   };
 
   function CheckEmail() {

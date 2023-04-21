@@ -2,10 +2,9 @@ const db = require("../models");
 const Product = db.product;
 
 exports.create = (req, res) => {
-
   const product= new Product({
     category: req.body.category,
-    subcategory: req.body.subcategory,
+    SubCategory: req.body.SubCategory,
     name: req.body.name,
     price: req.body.price,
     desc: req.body.desc,
@@ -25,12 +24,17 @@ exports.create = (req, res) => {
 };
 
 exports.findAll = (req, res) => {
-  const title = req.query.title;
-  var condition = title ? { title: { $regex: new RegExp(title), $options: "i" } } : {};
-
-  Product.find(condition)
+   Product.find()
     .then((data) => {
-      res.send(data);
+      const filters = req.query;
+      const filteredProducts = data.filter(product => {
+        let values = true ;
+        for(key in filters) {
+          values = values && product[key] == filters[key]
+        }
+        return values
+      })
+      res.send(filteredProducts);
     })
     .catch((err) => {
       res.status(500).send({

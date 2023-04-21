@@ -1,7 +1,6 @@
-const { user } = require("../models");
 const db = require("../models");
 const User = db.user;
-
+const jwt=require("jsonwebtoken")
 exports.create = (req, res) => {
 
   const user = new User({
@@ -23,10 +22,7 @@ exports.create = (req, res) => {
 };
 
 exports.findAll = (req, res) => {
-  const title = req.query.title;
-  var condition = title ? { title: { $regex: new RegExp(title), $options: "i" } } : {};
-
-  User.find(condition)
+   User.find()
     .then((data) => {
       res.send(data);
     })
@@ -111,13 +107,33 @@ exports.deleteAll = (req, res) => {
     });
 };
 
-exports.findByUsername = async (req,res) =>{
-  const {email, password} = req.query;
-  const validUser = await User.findOne({email,password});
-  if(validUser)
-  {
-    const userDetails = await User.find({email,password});
-    return res.json({valid:true,...userDetails});
+// exports.findByUsername = async (req,res) =>{
+//   const {email, password} = req.query;
+//   const validUser = await User.findOne({email,password});
+//   if(validUser)
+//   {
+//     const userDetails = await User.find({email,password});
+//     return res.json({valid:true,...userDetails});
+//   }
+//   return res.json({valid:false});
+// }
+
+exports.login = async(req, res) => {
+  const {email, password} = req.body;
+  const user = await User.findOne({email});
+  // console.log("data", user);
+
+  if(user && (await password == user.password)){
+    const token=jwt.sign({email:user.email},"Secret")
+    return res.json ({
+      token:token,
+      _id:user._id,
+      email:user.email,
+      // password:user.password
+    })
   }
-  return res.json({valid:false});
+  else {
+    return res.status(404).json({msg:"Invalid Data "})
+  }
 }
+

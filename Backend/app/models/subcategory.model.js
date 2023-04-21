@@ -1,6 +1,6 @@
 module.exports = (mongoose) => {
     const SubCategory = mongoose.model(
-      "subCategory",
+      "SubCategory",
       mongoose.Schema(
         {
           category: String,

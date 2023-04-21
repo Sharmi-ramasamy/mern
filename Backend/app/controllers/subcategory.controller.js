@@ -21,12 +21,18 @@ exports.create = (req, res) => {
 };
 
 exports.findAll = (req, res) => {
-  const title = req.query.title;
-  var condition = title ? { title: { $regex: new RegExp(title), $options: "i" } } : {};
-
-  SubCategory.find(condition)
+  console.log(req.headers.authorization)
+    SubCategory.find()
     .then((data) => {
-      res.send(data);
+      const filters = req.query;
+      const filteredSubcategory = data.filter(product => {
+        let values = true ;
+        for(key in filters) {
+          values = values && product[key] == filters[key]
+        }
+        return values
+      })
+      res.send(filteredSubcategory);
     })
     .catch((err) => {
       res.status(500).send({

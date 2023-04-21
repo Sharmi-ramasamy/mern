@@ -47,7 +47,8 @@ export const Checkout = () => {
     } else if (!name.match(/^[a-zA-Z]{3,}$/)) {
       setValidName(" * Name should contain combination of uppercase and lowercase");
       return true;
-    } else if (!email.match(/^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+$/)) {
+    // } else if (!email.match(/^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+$/)) {
+    } else if (!email.match(/^[a-zA-Z0-9]+@+[a-zA-Z0-9]+.+[A-z]/)) {
       setValidEmail("wrong email", "error");
       return true;
     } else if (!address.match(/^[a-zA-Z ]{3,10}$/)) {

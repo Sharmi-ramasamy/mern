@@ -24,6 +24,7 @@ body {
 
 .containers {
   margin: auto;
+  margin-top: 50px;
   width: 90%;
   height: 100%;
   display: flex;
@@ -33,11 +34,13 @@ body {
 }
 
 .d_flex {
+  margin-top: 10px;
   display: flex;
   justify-content: space-between;
 }
 
 .f_flex {
+  margin-top: 10px;
   display: flex;
 }
 
@@ -56,4 +59,10 @@ li {
 
 body {
   overflow-x: hidden;
+}
+
+.slide {
+  height: 400px;
+  object-fit: cover;
+  width: 100%;
 }

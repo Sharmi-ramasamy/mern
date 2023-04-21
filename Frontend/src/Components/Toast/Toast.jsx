@@ -9,7 +9,7 @@ const Toast = (message, type) => {
       });
     case "error":
       return toast.error(<div>{message}</div>, {
-        position: toast.POSITION.TOP_CENTER,
+        position: toast.POSITION.TOP_CENTER,    
       });
     case "warning":
       return toast.warning(<div>{message}</div>, {

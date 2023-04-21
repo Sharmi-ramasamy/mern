@@ -1,6 +1,5 @@
 module.exports = (app) => {
     const checkout = require("../controllers/checkout.controller.js");
-  
     var router = require("express").Router();
     router.post("/", checkout.create);
     router.get("/", checkout.findAll);

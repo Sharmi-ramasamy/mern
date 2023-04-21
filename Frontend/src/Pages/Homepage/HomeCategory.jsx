@@ -1,49 +1,58 @@
 import React from "react";
 import "./HomeCategory.css";
+import { Link,useNavigate } from "react-router-dom";
 
 export const HomeCategory = () => {
   const data = [
     {
-      catImg: "./Assets/HomeCategory/Cat1.png",
-      catName: "Fashion",
+      catImg: "./Assets/HomeCategory/Jewels.png",
+      catName: "Jewels",
     },
     {
-      catImg: "./Assets/HomeCategory/Cat2.png",
-      catName: "Electronic",
+      catImg: "./Assets/HomeCategory/Mobiles.png",
+      catName: "Mobiles",
     },
     {
-      catImg: "./Assets/HomeCategory/Cat5.png",
-      catName: "Gifts",
+      catImg: "./Assets/HomeCategory/Dress.png",
+      catName: "Dress",
     },
     {
-      catImg: "./Assets/HomeCategory/Cat6.png",
-      catName: "Music",
+      catImg: "./Assets/HomeCategory/Shoes.png",
+      catName: "Shoes",
     },
-    {
-      catImg: "./Assets/HomeCategory/Cat7.png",
-      catName: "Health & Beauty",
-    },
-    {
-      catImg: "./Assets/HomeCategory/Cat9.png",
-      catName: "Baby Toys",
-    },
-    {
-      catImg: "./Assets/HomeCategory/Cat10.png",
-      catName: "Groceries",
-    },
+    // {
+    //   catImg: "./Assets/HomeCategory/Watch.png",
+    //   catName: "Watch",
+    // },
+    // {
+    //   catImg: "./Assets/HomeCategory/Grocery.png",
+    //   catName: "Grocery",
+    // },
+    // {
+    //   catImg: "./Assets/HomeCategory/Electronics.png",
+    //   catName: "Electronics",
+    // },
+    // {
+    //   catImg: "./Assets/HomeCategory/Toys.png",
+    //   catName: "Two Wheelers",
+    // },
   ];
-
+  const navigate = useNavigate();
   return (
     <>
       <div className="category">
         {data.map((value, index) => {
           return (
             <div className="box f_flex" key={index}>
-              <img src={value.catImg} alt="" />
-              <span>{value.catName}</span>
+             <Link to={`/category/${value.catName}`}>
+                  <img src={value.catImg} alt="Categories" />
+                  <span> {value.catName} </span>
+             </Link>
             </div>
+            
           );
         })}
+         <button id="slider_btn" onClick={() => navigate(`/category`)}> More Items </button>
       </div>
     </>
   );

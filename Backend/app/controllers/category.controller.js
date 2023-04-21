@@ -20,12 +20,19 @@ exports.create = (req, res) => {
 };
 
 exports.findAll = (req, res) => {
-  const title = req.query.title;
-  var condition = title ? { title: { $regex: new RegExp(title), $options: "i" } } : {};
-
-  Category.find(condition)
+    Category.find()
     .then((data) => {
-      res.send(data);
+      const filters = req.query;
+      const filteredCategory = data.filter(product => {
+        let values = true ;
+        // console.log(filters)
+        for(key in filters) {
+          values = values && product[key] == filters[key]
+        }
+        return values
+      })
+      res.send(filteredCategory);
+      // console.log("filtered",filteredCategory)
     })
     .catch((err) => {
       res.status(500).send({

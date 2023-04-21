@@ -6,15 +6,23 @@ import ecomUrl from "../AxiosUrl/Axios";
 import Toast from "../Toast/Toast";
 export const SubCategory = () => {
   const [items, setItems] = useState([]);
+  const { id, subcat } = useParams();
 
   useEffect(() => {
     loaddata();
-  }, []);
+  }, [id,subcat]);
+  const token = sessionStorage.getItem("token")
+  const headers = {
+  'Authorization': `${token}`,
+  'Content-Type': 'application/json'
+};
 
   const loaddata = async () => {
-    const resp = await ecomUrl.get("subcategory");
-    setItems(resp.data);
-    const response = await ecomUrl.get("product");
+    await ecomUrl.get(`subcategory?category=${id}`,{headers})
+    .then(response =>
+      setItems(response.data))
+    .catch(error => console.error(error));
+  const response = await ecomUrl.get(`product?SubCategory=${subcat}`);
     setGetproduct(response.data);
   };
 
@@ -33,9 +41,9 @@ export const SubCategory = () => {
     });
     Toast("Item Added to the Cart Successfully", "success");
   };
-  const { id, subcat } = useParams();
+ 
+
   const navigate = useNavigate();
-  const categoryName = id;
   const [getproduct, setGetproduct] = useState([]);
   return (
     <>
@@ -43,14 +51,9 @@ export const SubCategory = () => {
         <h2> Filter Products: </h2>
         <div>
           {items
-            .filter((categoryItem) => {
-              if (categoryName === categoryItem.category) {
-                return categoryItem;
-              }
-            })
             .map((val) => (
               <div key={val._id}>
-                <button id="buttons" onClick={() => navigate(`/category/category=${categoryName}/${val.subcategory}`)}>
+                <button id="buttons" onClick={() => navigate(`/category/${id}/${val.subcategory}`)}>
                   {val.subcategory}
                 </button>
               </div>
@@ -58,12 +61,8 @@ export const SubCategory = () => {
         </div>
 
         <div className="products">
+
           {getproduct
-            .filter((subcategoryitem) => {
-              if (subcat === subcategoryitem.SubCategory) {
-                return subcategoryitem;
-              }
-            })
             .map((productItem) => (
               <div key={productItem._id} className="productcards">
                 <div>

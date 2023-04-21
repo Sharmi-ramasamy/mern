@@ -1,8 +1,9 @@
-/* eslint-disable no-undef */
 const express = require("express");
 const cors = require("cors");
-
+const dotenv = require("dotenv")
 const app = express();
+
+dotenv.config({path:'../Backend/app/config/.env'})
 
 var corsOptions = {
   origin: "http://localhost:3000",
@@ -38,6 +39,7 @@ require("./app/routes/product.routes")(app);
 require("./app/routes/cart.routes")(app);
 require("./app/routes/user.routes")(app);
 require("./app/routes/checkout.routes")(app);
+
 // set port, listen for requests
 const PORT = process.env.PORT || 8080;
 app.listen(PORT, () => {

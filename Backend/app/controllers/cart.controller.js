@@ -28,10 +28,7 @@ exports.create = (req, res) => {
 };
 
 exports.findAll = (req, res) => {
-  const title = req.query.title;
-  var condition = title ? { title: { $regex: new RegExp(title), $options: "i" } } : {};
-
-  Cart.find(condition)
+  Cart.find()
     .then((data) => {
       res.send(data);
     })
