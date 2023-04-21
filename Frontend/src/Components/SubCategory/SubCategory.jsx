@@ -71,7 +71,7 @@ export const SubCategory = () => {
                 <div>
                   <h3 className="product-name"> {productItem.name} </h3>
                 </div>
-                <div className="product-price"> $ {productItem.price} </div>
+                <div className="product-price"> {'\u20B9'} {productItem.price} </div>
 
                 <div className="product-details"> {productItem.desc} </div>
                 <br />
