@@ -8,7 +8,7 @@ module.exports = (mongoose) => {
           address: String,
           city: String,
           state: String,
-          zip: String,
+          zip: String
         },
         { timestamps: true }
       )

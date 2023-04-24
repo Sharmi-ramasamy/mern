@@ -55,6 +55,7 @@ export const Cart = () => {
 
   const removeProduct = (productItem) => {
     ecomUrl.delete("cart/" + productItem._id);
+    // console.log(productItem)
     setTimeout(() => {
       loadData();
     }, 200);

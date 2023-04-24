@@ -30,7 +30,15 @@ exports.create = (req, res) => {
 exports.findAll = (req, res) => {
   Cart.find()
     .then((data) => {
-      res.send(data);
+      const filters = req.query;
+      const filteredCart = data.filter(product => {
+        let values = true;
+        for(key in filters) {
+          values = values && product[key] == filters[key]
+        }
+         return values
+      })
+      res.send(filteredCart);
     })
     .catch((err) => {
       res.status(500).send({
@@ -80,7 +88,7 @@ exports.delete = (req, res) => {
   const id = req.params.id;
 
   Cart.findByIdAndRemove(id)
-    .then((data) => {POST
+    .then((data) => {
       if (!data) {
         res.status(404).send({
           message: `Cannot delete Cart with id=${id}. Maybe Cart was not found!`,

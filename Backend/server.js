@@ -2,7 +2,6 @@ const express = require("express");
 const cors = require("cors");
 const dotenv = require("dotenv")
 const app = express();
-
 dotenv.config({path:'../Backend/app/config/.env'})
 
 var corsOptions = {
@@ -17,6 +16,7 @@ app.use(express.json());
 // parse requests of content-type - application/x-www-form-urlencoded
 app.use(express.urlencoded({ extended: true }));
 const db = require("./app/models");
+
 db.mongoose
   .connect(db.url, {
     useNewUrlParser: true,
@@ -39,6 +39,8 @@ require("./app/routes/product.routes")(app);
 require("./app/routes/cart.routes")(app);
 require("./app/routes/user.routes")(app);
 require("./app/routes/checkout.routes")(app);
+
+// require("./app/routes")
 
 // set port, listen for requests
 const PORT = process.env.PORT || 8080;

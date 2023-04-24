@@ -82,7 +82,7 @@ export const SubCategory = () => {
                   <i className="fa fa-star"></i>
                   <i className="fa fa-star"></i>
                 </div>
-                <div>
+                <div className>
                   <button className="product-add-button" onClick={() => addProduct(productItem)}>
                     Add to Cart
                   </button>

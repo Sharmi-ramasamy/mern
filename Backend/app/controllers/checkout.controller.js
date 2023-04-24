@@ -1,3 +1,4 @@
+const { checkout } = require("../models");
 const db = require("../models");
 const Checkout = db.checkout;
 
@@ -8,12 +9,12 @@ exports.create = (req, res) => {
     address: req.body.address,
     city: req.body.city,
     state: req.body.state,
-    zip: req.body.zip,
+    zip: req.body.zip
   });
 
   checkout
     .save(checkout)
-    .thenz((data) => {
+    .then((data) => {
       res.send(data);
     })
     .catch((err) => {

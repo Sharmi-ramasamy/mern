@@ -4,7 +4,12 @@ module.exports = (mongoose) => {
       mongoose.Schema(
         {
           name: String,
-          email: String,
+          email: {
+            type:String,
+            required: true,
+            unique: [true,{message:"Email already exists..!!"}]
+          },
+          // email: String,
           password: String,
         },
         { timestamps: true }

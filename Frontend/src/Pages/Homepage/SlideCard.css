@@ -35,7 +35,7 @@ body {
 
 .d_flex {
   margin-top: 10px;
-  display: flex;
+  /* display: flex; */
   justify-content: space-between;
 }
 
@@ -53,9 +53,9 @@ li {
   list-style: none;
 }
 
-.RText {
+/* .RText {
   text-align-last: right;
-}
+} */
 
 body {
   overflow-x: hidden;

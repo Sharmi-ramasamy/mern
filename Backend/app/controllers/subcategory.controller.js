@@ -78,6 +78,20 @@ exports.update = (req, res) => {
     });
 };
 
+exports.updateAll = (req, res) => {
+  SubCategory.updateMany({})
+    .then((data) => {
+      res.send({
+        message: `${data.deletedCount} SubCategory were deleted successfully!`,
+      });
+    })
+    .catch((err) => {
+      res.status(500).send({
+        message: err.message || "Some error occurred while removing all category.",
+      });
+    });
+};
+
 exports.delete = (req, res) => {
   const id = req.params.id;
 

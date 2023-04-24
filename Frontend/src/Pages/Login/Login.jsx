@@ -31,7 +31,7 @@ export default function Login() {
       ecomUrl
         .post(`/user/log`,{email:userEmail,password:userPassword})
         .then((res) => {
-          console.log(res.data);
+          // console.log(res.data);
           if (res.data) {
             sessionStorage.setItem("token", res.data.token);
             sessionStorage.setItem("id", res.data._id);
@@ -45,6 +45,9 @@ export default function Login() {
           else if (res.data.email !== userEmail) {
             Toast("Invalid Email", "error");
           }
+          // else if (res.data.email === userEmail) {
+          //   Toast("Email Already Exists..!!")
+          // }
         })
         .catch((err) => {
           Toast("Invalid Data", "error", err);

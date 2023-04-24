@@ -6,6 +6,6 @@ module.exports = (app) => {
   router.get("/:id", category.findOne);
   router.put("/:id", category.update);
   router.delete("/:id", category.delete);
-  router.delete("/", category.deleteAll);
+  // router.delete("/", category.deleteAll);
   app.use("/api/category", router);
-};
+}

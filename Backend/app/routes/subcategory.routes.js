@@ -6,7 +6,8 @@ module.exports = (app) => {
     router.get("/", authToken,subcategory.findAll);
     router.get("/:id", subcategory.findOne);
     router.delete("/:id", subcategory.delete);
-    router.delete("/", subcategory.deleteAll);  
+    // router.delete("/", subcategory.deleteAll);  
+    router.put("/:id", subcategory.update)
     app.use("/api/subcategory", router);
   };
   

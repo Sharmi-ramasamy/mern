@@ -60,8 +60,8 @@ export const Checkout = () => {
     } else if (!state.match(/^[a-zA-Z]{3,20}$/)) {
       setValidState("Alphabets only allowed");
       return true;
-    } else if (!zip.match(/^[0-9]{5,6}$/)) {
-      setValidZip("Numbers only allowed");
+    } else if (!zip.match(/^[0-9]{6}$/)) {
+      setValidZip("Numbers only allowed with 6 Digits");
       return true;
     } else {
       return false;

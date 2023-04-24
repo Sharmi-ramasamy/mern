@@ -8,7 +8,6 @@ exports.create = (req, res) => {
     email: req.body.email,
     password: req.body.password,
   });
-
   user
     .save(user)
     .then((data) => {
@@ -133,7 +132,7 @@ exports.login = async(req, res) => {
     })
   }
   else {
-    return res.status(404).json({msg:"Invalid Data "})
+    return res.status(404).json({msg:"Invalid Data...!!"})
   }
 }
 

@@ -54,6 +54,7 @@ export const Signup = () => {
       Toast("Signup Successful", "success");
       ecomUrl
         .post("/user", user)
+        
         .then(() => {
           navigate("/login");
         })
