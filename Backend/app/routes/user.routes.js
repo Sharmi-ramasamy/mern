@@ -10,6 +10,6 @@ module.exports = (app) => {
     // router.delete("/", user.deleteAll);
     // router.post('/login',user.findByUsername);
     router.post('/log',user.login)
-    app.use("/api/user", router);
+    app.use("/user", router);
   };
   

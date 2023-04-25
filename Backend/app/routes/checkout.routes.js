@@ -7,6 +7,6 @@ module.exports = (app) => {
     router.put("/:id", checkout.update);
     router.delete("/:id", checkout.delete);
     router.delete("/", checkout.deleteAll);
-    app.use("/api/checkout", router);
+    app.use("/checkout", router);
   };
   

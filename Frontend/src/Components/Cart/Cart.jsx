@@ -11,9 +11,14 @@ export const Cart = () => {
   useEffect(() => {
     loadData();
   }, []);
+  const token = sessionStorage.getItem("token")
+  const headers = {
+  'Authorization': `${token}`,
+  'Content-Type': 'application/json'
+};
 
   const loadData = async () => {
-    const response = await ecomUrl.get("cart");
+    const response = await ecomUrl.get("cart",{headers});
     setGetProduct(response.data);
   };
 
@@ -76,9 +81,14 @@ export const Cart = () => {
     }, 100);
   };
 
-  const totalPrice = getProduct.reduce((price, value) => price + value.price * value.quantity, 0);
+  const totalPrice = getProduct.filter((e)  => {
+    if (sessionStorage.getItem("email") === e.email) {
+      return e;
+    }
+  }).reduce((price, value) => price + value.price * value.quantity, 0);
   return (
     <>
+    <h2> Please Login for further Procedure: </h2>
       <div className="cart-items">
         <h2 className="cart-items-header"> Cart Items </h2>
         <div className="cart-length">

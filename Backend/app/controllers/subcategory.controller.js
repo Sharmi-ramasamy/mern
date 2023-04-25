@@ -21,7 +21,7 @@ exports.create = (req, res) => {
 };
 
 exports.findAll = (req, res) => {
-  console.log(req.headers.authorization)
+  // console.log(req.headers.authorization)
     SubCategory.find()
     .then((data) => {
       const filters = req.query;
@@ -74,20 +74,6 @@ exports.update = (req, res) => {
     .catch((err) => {
       res.status(500).send({
         message: "Error updating subcategory with id=" + id,
-      });
-    });
-};
-
-exports.updateAll = (req, res) => {
-  SubCategory.updateMany({})
-    .then((data) => {
-      res.send({
-        message: `${data.deletedCount} SubCategory were deleted successfully!`,
-      });
-    })
-    .catch((err) => {
-      res.status(500).send({
-        message: err.message || "Some error occurred while removing all category.",
       });
     });
 };

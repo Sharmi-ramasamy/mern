@@ -10,15 +10,15 @@ export const SubCategory = () => {
 
   useEffect(() => {
     loaddata();
-  }, [id,subcat]);
-  const token = sessionStorage.getItem("token")
-  const headers = {
-  'Authorization': `${token}`,
-  'Content-Type': 'application/json'
-};
+  }, [id,subcat])
+//   const token = sessionStorage.getItem("token")
+//   const headers = {
+//   'Authorization': `${token}`,
+//   'Content-Type': 'application/json'
+// };
 
   const loaddata = async () => {
-    await ecomUrl.get(`subcategory?category=${id}`,{headers})
+    await ecomUrl.get(`subcategory?category=${id}`)
     .then(response =>
       setItems(response.data))
     .catch(error => console.error(error));
