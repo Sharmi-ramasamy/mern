@@ -1,7 +1,7 @@
 const db = require("../models");
 const Cart = db.cart;
 
-exports.create = (req, res) => {
+exports.addCart = (req, res) => {
 
   const cart= new Cart({
     category: req.body.category,
@@ -27,7 +27,7 @@ exports.create = (req, res) => {
     });
 };
 
-exports.findAll = (req, res) => {
+exports.getCartItems = (req, res) => {
   Cart.find()
     .then((data) => {
       const filters = req.query;
@@ -47,7 +47,7 @@ exports.findAll = (req, res) => {
     });
 };
 
-exports.findOne = (req, res) => {
+exports.getCartItemsById = (req, res) => {
   const id = req.params.id;
 
   Cart.findById(id)
@@ -60,7 +60,7 @@ exports.findOne = (req, res) => {
     });
 };
 
-exports.update = (req, res) => {
+exports.updateCartById = (req, res) => {
   if (!req.body) {
     return res.status(400).send({
       message: "Data to update cannot be empty!",
@@ -84,7 +84,7 @@ exports.update = (req, res) => {
     });
 };
 
-exports.delete = (req, res) => {
+exports.deleteCartById = (req, res) => {
   const id = req.params.id;
 
   Cart.findByIdAndRemove(id)
@@ -106,7 +106,7 @@ exports.delete = (req, res) => {
     });
 };
 
-exports.deleteAll = (req, res) => {
+exports.deleteAllCartItems = (req, res) => {
   Cart.deleteMany({})
     .then((data) => {
       res.send({

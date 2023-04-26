@@ -37,8 +37,15 @@
   cursor: pointer;
 }
 
-h2 {
-  color: brown;
+.details{
+  padding-top: 30px;
+  margin-left: 30px;
+}
+
+.subcat_head {
+  padding-top: 20px ;
+  font-family:fantasy;
+  font-size:xx-large;
 }
 
 h3 {
@@ -134,3 +141,30 @@ h3 {
 .product-add-button:active {
   transform: translateY(2px);
 }
+
+.success {
+  margin-left: 500px;
+  padding-top: 200px;
+}
+
+.fas.fa-check-circle {
+  color: green;
+  animation: tick 5s;
+  animation-fill-mode: forwards;
+  margin-left: 600px;
+  font-size: 60px;
+}
+
+@keyframes tick {
+  0% {
+    transform: scale(0);
+  }
+  50% {
+    transform: scale(1.2);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+

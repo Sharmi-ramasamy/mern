@@ -1,14 +1,12 @@
 module.exports = (app) => {
     const subcategory = require("../controllers/subcategory.controller.js");
     var router = require("express").Router();
-    // const authToken = require("../middleware/auth.js")
-    router.post("/", subcategory.create);
-    // router.get("/", authToken,subcategory.findAll);
-    router.get("/", subcategory.findAll);
-    router.get("/:id", subcategory.findOne);
-    router.delete("/:id", subcategory.delete);
-    // router.delete("/", subcategory.deleteAll);  
-    router.put("/:id", subcategory.update)
+    router.post("/", subcategory.addSubcategory);
+    router.get("/", subcategory.findAllSubcategory);
+    router.get("/:id", subcategory.findSubcategoryById);
+    router.delete("/:id", subcategory.deleteSubcategoryById);
+    // router.delete("/", subcategory.deleteAllSubcategory);  
+    router.put("/:id", subcategory.updateSubcategoryById)
     app.use("/subcategory", router);
   };
   

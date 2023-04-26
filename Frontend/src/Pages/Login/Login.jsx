@@ -37,7 +37,7 @@ export default function Login() {
             sessionStorage.setItem("id", res.data._id);
             sessionStorage.setItem("email", res.data.email);
             Toast("Login Successful", "success");
-            navigate("/");
+            navigate("/cart");
           } 
           else if (res.data.password !== userPassword) {
             Toast("Invalid Password", "error");

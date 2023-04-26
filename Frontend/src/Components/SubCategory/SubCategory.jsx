@@ -38,8 +38,11 @@ export const SubCategory = () => {
       email: sessionStorage.getItem("email"),
       quantity: 1,
       value: productItem.price,
-    });
-    Toast("Item Added to the Cart Successfully", "success");
+    })
+    .then((res)=>{
+      Toast("Item Added to the Cart Successfully", "success");
+    }).catch((err)=>{ Toast("Please Login to Add Items to the Cart", "error");})
+  
   };
  
 
@@ -48,7 +51,7 @@ export const SubCategory = () => {
   return (
     <>
       <div className="wrapper">
-        <h2> Filter Products: </h2>
+        <h2 className="subcat_head"> Products: </h2>
         <div>
           {items
             .map((val) => (

@@ -2,7 +2,7 @@ const { checkout } = require("../models");
 const db = require("../models");
 const Checkout = db.checkout;
 
-exports.create = (req, res) => {
+exports.addCheckout = (req, res) => {
   const checkout= new Checkout({
     name: req.body.name,
     email: req.body.email,
@@ -24,7 +24,7 @@ exports.create = (req, res) => {
     });
 };
 
-exports.findAll = (req, res) => {
+exports.getAllCheckouts = (req, res) => {
     Checkout.find()
     .then((data) => {
       res.send(data);
@@ -36,7 +36,7 @@ exports.findAll = (req, res) => {
     });
 };
 
-exports.findOne = (req, res) => {
+exports.findCheckoutById = (req, res) => {
   const id = req.params.id;
 
   Checkout.findById(id)
@@ -49,7 +49,7 @@ exports.findOne = (req, res) => {
     });
 };
 
-exports.update = (req, res) => {
+exports.updateCheckoutById = (req, res) => {
   if (!req.body) {
     return res.status(400).send({
       message: "Data to update cannot be empty!",
@@ -73,7 +73,7 @@ exports.update = (req, res) => {
     });
 };
 
-exports.delete = (req, res) => {
+exports.deleteCheckoutById = (req, res) => {
   const id = req.params.id;
 
   Checkout.findByIdAndRemove(id)
@@ -95,7 +95,7 @@ exports.delete = (req, res) => {
     });
 };
 
-exports.deleteAll = (req, res) => {
+exports.deleteAllCheckout = (req, res) => {
   Checkout.deleteMany({})
     .then((data) => {
       res.send({

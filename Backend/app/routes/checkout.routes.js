@@ -1,12 +1,12 @@
 module.exports = (app) => {
     const checkout = require("../controllers/checkout.controller.js");
     var router = require("express").Router();
-    router.post("/", checkout.create);
-    router.get("/", checkout.findAll);
-    router.get("/:id", checkout.findOne);
-    router.put("/:id", checkout.update);
-    router.delete("/:id", checkout.delete);
-    router.delete("/", checkout.deleteAll);
+    router.post("/", checkout.addCheckout);
+    router.get("/", checkout.getAllCheckouts);
+    router.get("/:id", checkout.findCheckoutById);
+    router.put("/:id", checkout.updateCheckoutById);
+    router.delete("/:id", checkout.deleteCheckoutById);
+    router.delete("/", checkout.deleteAllCheckout);
     app.use("/checkout", router);
   };
   

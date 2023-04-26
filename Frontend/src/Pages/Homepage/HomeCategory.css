@@ -34,7 +34,7 @@
   cursor: pointer;
 }
 
-/* .info {
+.info {
   font-size: larger;
   margin: 20px;
   text-decoration: none;
@@ -45,7 +45,7 @@
 
 .info:hover {
   color: crimson;
-} */
+}
 
 #slider_btn {
   margin: 10px 60px;

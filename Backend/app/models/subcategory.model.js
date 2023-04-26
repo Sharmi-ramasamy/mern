@@ -3,8 +3,14 @@ module.exports = (mongoose) => {
       "SubCategory",
       mongoose.Schema(
         {
-          category: String,
-          subcategory: String,
+          category: {
+            type: String,
+            required: true
+          },
+          subcategory: {
+            type: String,
+            required: true
+          }
         },
         { timestamps: true }
       )

@@ -1,7 +1,7 @@
 const db = require("../models");
 const Product = db.product;
 
-exports.create = (req, res) => {
+exports.addProduct = (req, res) => {
   const product= new Product({
     category: req.body.category,
     SubCategory: req.body.SubCategory,
@@ -23,7 +23,7 @@ exports.create = (req, res) => {
     });
 };
 
-exports.findAll = (req, res) => {
+exports.findAllProduct = (req, res) => {
    Product.find()
     .then((data) => {
       const filters = req.query;
@@ -43,7 +43,7 @@ exports.findAll = (req, res) => {
     });
 };
 
-exports.findOne = (req, res) => {
+exports.findProductById = (req, res) => {
   const id = req.params.id;
 
   Product.findById(id)
@@ -56,7 +56,7 @@ exports.findOne = (req, res) => {
     });
 };
 
-exports.update = (req, res) => {
+exports.updateProductById = (req, res) => {
   if (!req.body) {
     return res.status(400).send({
       message: "Data to update cannot be empty!",
@@ -80,7 +80,7 @@ exports.update = (req, res) => {
     });
 };
 
-exports.delete = (req, res) => {
+exports.deleteProductById = (req, res) => {
   const id = req.params.id;
 
   Product.findByIdAndRemove(id)
@@ -102,7 +102,7 @@ exports.delete = (req, res) => {
     });
 };
 
-exports.deleteAll = (req, res) => {
+exports.deleteAllProducts = (req, res) => {
   Product.deleteMany({})
     .then((data) => {
       res.send({

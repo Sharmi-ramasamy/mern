@@ -1,7 +1,7 @@
 const db = require("../models");
 const User = db.user;
 const jwt=require("jsonwebtoken")
-exports.create = (req, res) => {
+exports.userSignup = (req, res) => {
 
   const user = new User({
     name: req.body.name,
@@ -20,7 +20,7 @@ exports.create = (req, res) => {
     });
 };
 
-exports.findAll = (req, res) => {
+exports.getAllUsers = (req, res) => {
    User.find()
     .then((data) => {
       res.send(data);
@@ -32,7 +32,7 @@ exports.findAll = (req, res) => {
     });
 };
 
-exports.findOne = (req, res) => {
+exports.findUserById = (req, res) => {
   const id = req.params.id;
 
   User.findById(id)
@@ -46,7 +46,7 @@ exports.findOne = (req, res) => {
 };
 
 
-exports.update = (req, res) => {
+exports.updateuserById = (req, res) => {
   if (!req.body) {
     return res.status(400).send({
       message: "Data to update cannot be empty!",
@@ -70,7 +70,7 @@ exports.update = (req, res) => {
     });
 };
 
-exports.delete = (req, res) => {
+exports.deleteUserById = (req, res) => {
   const id = req.params.id;
 
   User.findByIdAndRemove(id)
@@ -92,7 +92,7 @@ exports.delete = (req, res) => {
     });
 };
 
-exports.deleteAll = (req, res) => {
+exports.deleteAllUsers = (req, res) => {
   User.deleteMany({})
     .then((data) => {
       res.send({
@@ -117,7 +117,7 @@ exports.deleteAll = (req, res) => {
 //   return res.json({valid:false});
 // }
 
-exports.login = async(req, res) => {
+exports.userLogin = async(req, res) => {
   const {email, password} = req.body;
   const user = await User.findOne({email});
   // console.log("data", user);

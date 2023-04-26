@@ -1,7 +1,7 @@
 const db = require("../models");
 const SubCategory = db.subcategory;
 
-exports.create = (req, res) => {
+exports.addSubcategory = (req, res) => {
 
   const subcategory = new SubCategory({
     category: req.body.category,
@@ -20,7 +20,7 @@ exports.create = (req, res) => {
     });
 };
 
-exports.findAll = (req, res) => {
+exports.findAllSubcategory = (req, res) => {
   // console.log(req.headers.authorization)
     SubCategory.find()
     .then((data) => {
@@ -41,7 +41,7 @@ exports.findAll = (req, res) => {
     });
 };
 
-exports.findOne = (req, res) => {
+exports.findSubcategoryById = (req, res) => {
   const id = req.params.id;
 
   SubCategory.findById(id)
@@ -54,7 +54,7 @@ exports.findOne = (req, res) => {
     });
 };
 
-exports.update = (req, res) => {
+exports.updateSubcategoryById = (req, res) => {
   if (!req.body) {
     return res.status(400).send({
       message: "Data to update can not be empty!",
@@ -78,7 +78,7 @@ exports.update = (req, res) => {
     });
 };
 
-exports.delete = (req, res) => {
+exports.deleteSubcategoryById = (req, res) => {
   const id = req.params.id;
 
   SubCategory.findByIdAndRemove(id)
@@ -100,7 +100,7 @@ exports.delete = (req, res) => {
     });
 };
 
-exports.deleteAll = (req, res) => {
+exports.deleteAllSubcategory = (req, res) => {
   SubCategory.deleteMany({})
     .then((data) => {
       res.send({

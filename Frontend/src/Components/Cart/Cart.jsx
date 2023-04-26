@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import "./Cart.css";
 import ecomUrl from "../AxiosUrl/Axios";
 import { useNavigate } from "react-router";
+import Toast from "../Toast/Toast";
 
 export const Cart = () => {
   const [getProduct, setGetProduct] = useState([]);
@@ -18,7 +19,12 @@ export const Cart = () => {
 };
 
   const loadData = async () => {
-    const response = await ecomUrl.get("cart",{headers});
+    const response = await ecomUrl.get("cart",{headers})
+    .catch ((e) => {
+      Toast("Please login to view the Cart...!!", "error")
+      navigate('/');
+      // setGetProduct(response.data);
+    })
     setGetProduct(response.data);
   };
 
@@ -88,7 +94,6 @@ export const Cart = () => {
   }).reduce((price, value) => price + value.price * value.quantity, 0);
   return (
     <>
-    <h2> Please Login for further Procedure: </h2>
       <div className="cart-items">
         <h2 className="cart-items-header"> Cart Items </h2>
         <div className="cart-length">

@@ -1,7 +1,7 @@
 const db = require("../models");
 const Category = db.category;
 
-exports.create = async (req, res) => {
+exports.addCategory = async (req, res) => {
   try {
     const category = new Category({
       name: req.body.name,
@@ -18,7 +18,7 @@ exports.create = async (req, res) => {
 };
 
 
-exports.findAll = async (req, res) => {
+exports.findAllCategory = async (req, res) => {
   try {
     const data = await Category.find();
     const filters = req.query;
@@ -38,7 +38,7 @@ exports.findAll = async (req, res) => {
 };
 
 
-exports.findOne = async (req, res) => {
+exports.findCategoryById = async (req, res) => {
   try {
     const id = req.params.id;
     const data = await Category.findById(id);
@@ -54,7 +54,7 @@ exports.findOne = async (req, res) => {
 };
 
 
-exports.update = async (req, res) => {
+exports.updateategoryById = async (req, res) => {
   try {
     if (!req.body) {
       return res.status(400).send({
@@ -80,7 +80,7 @@ exports.update = async (req, res) => {
 };
 
 
-exports.delete = async (req, res) => {
+exports.deleteCategoryById = async (req, res) => {
   try {
     const id = req.params.id;
     const data = await Category.findByIdAndRemove(id);
@@ -102,7 +102,7 @@ exports.delete = async (req, res) => {
 };
 
 
-exports.deleteAll = async (req, res) => {
+exports.deleteAllCategory = async (req, res) => {
   try {
     const data = await Category.deleteMany({});
     res.send({
