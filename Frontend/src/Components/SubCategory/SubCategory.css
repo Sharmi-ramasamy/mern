@@ -112,6 +112,10 @@ h3 {
 
 .product-details {
   font-size: 18px;
+  /* text-overflow: ellipsis; */
+  width:fit-content;
+  /* white-space: nowrap; */
+  /* overflow: hidden; */
 }
 
 .product-rating {

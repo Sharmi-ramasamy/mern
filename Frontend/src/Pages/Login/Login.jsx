@@ -37,7 +37,7 @@ export default function Login() {
             sessionStorage.setItem("id", res.data._id);
             sessionStorage.setItem("email", res.data.email);
             Toast("Login Successful", "success");
-            navigate("/cart");
+            navigate("/category");
           } 
           else if (res.data.password !== userPassword) {
             Toast("Invalid Password", "error");
@@ -52,6 +52,7 @@ export default function Login() {
         .catch((err) => {
           Toast("Invalid Data", "error", err);
         });
+        
     }
 
 

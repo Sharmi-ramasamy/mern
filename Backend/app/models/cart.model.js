@@ -13,7 +13,7 @@ module.exports = (mongoose) => {
           },
           name: {
             type: String,
-            required: true
+            required: true,
           },
           price:{
             type: String,
@@ -21,7 +21,7 @@ module.exports = (mongoose) => {
           },
           desc: {
             type: String,
-            required: true,
+            required: true, 
           },
           image: {
             type: String,

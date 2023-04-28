@@ -123,16 +123,16 @@ exports.userLogin = async(req, res) => {
   // console.log("data", user);
 
   if(user && (await password == user.password)){
-    const token=jwt.sign({email:user.email},"Secret")
+    const token=jwt.sign({email:user.email},"Secret",{expiresIn: '6h'});
     return res.json ({
       token:token,
-      _id:user._id,
+      _id:user._id, 
       email:user.email,
-      // password:user.password
+      // password:user.password,
     })
   }
   else {
     return res.status(404).json({msg:"Invalid Data...!!"})
-  }
+  }  
 }
 

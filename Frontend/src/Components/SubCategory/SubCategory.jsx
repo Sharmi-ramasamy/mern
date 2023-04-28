@@ -11,11 +11,6 @@ export const SubCategory = () => {
   useEffect(() => {
     loaddata();
   }, [id,subcat])
-//   const token = sessionStorage.getItem("token")
-//   const headers = {
-//   'Authorization': `${token}`,
-//   'Content-Type': 'application/json'
-// };
 
   const loaddata = async () => {
     await ecomUrl.get(`subcategory?category=${id}`)
@@ -41,7 +36,10 @@ export const SubCategory = () => {
     })
     .then((res)=>{
       Toast("Item Added to the Cart Successfully", "success");
-    }).catch((err)=>{ Toast("Please Login to Add Items to the Cart", "error");})
+    }).catch((err)=>{ 
+      Toast("Please Login to Add Items to the Cart", "error");
+      navigate('/login')
+    })
   
   };
  

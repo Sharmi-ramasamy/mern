@@ -2,7 +2,8 @@ const express = require("express");
 const cors = require("cors");
 const dotenv = require("dotenv")
 const app = express();
-dotenv.config({path:'../Backend/app/config/.env'})
+dotenv.config({path:'../Backend/app/.env'})
+
 
 var corsOptions = {
   origin: "http://localhost:3000",
@@ -41,10 +42,9 @@ require("./app/routes/cart.routes")(app);
 require("./app/routes/user.routes")(app);
 require("./app/routes/checkout.routes")(app);
 
-// require("./app/routes")
-
 // set port, listen for requests
 const PORT = process.env.PORT || 8080;
+//  If the PORT variable is not defined in the .env file, we are using the default value of 8080.
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}.`);
 })

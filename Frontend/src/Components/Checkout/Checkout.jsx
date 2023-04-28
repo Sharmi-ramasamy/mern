@@ -51,10 +51,10 @@ export const Checkout = () => {
     } else if (!email.match(/^[a-zA-Z0-9]+@+[a-zA-Z0-9]+.+[A-z]/)) {
       setValidEmail("wrong email", "error");
       return true;
-    } else if (!address.match(/^[a-zA-Z ]{3,10}$/)) {
+    } else if (!address.match(/^[a-zA-Z ]{3,30}$/)) {
       setValidAddress("No special characters allowed");
       return true;
-    } else if (!city.match(/^[a-zA-Z]{3,20}$/)) {
+    } else if (!city.match(/^[a-zA-Z]{3,10}$/)) {
       setValidCity("City should contain only alphabets");
       return true;
     } else if (!state.match(/^[a-zA-Z]{3,20}$/)) {

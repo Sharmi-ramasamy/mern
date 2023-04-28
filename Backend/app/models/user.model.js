@@ -5,27 +5,23 @@ module.exports = (mongoose) => {
         {
           name:{
             type: String,
-            required: true
+            required: true,
+            minLength:3,
+            match: /^[a-zA-Z\s]{3,}$/
           },
           email: {
             type:String,
             required: true,
-            unique: [true,{message:"Email already exists..!!"}]
+            unique: [true,{message:"Email already exists..!!"}],
+            match: /^[a-zA-Z0-9]+@+[a-zA-Z0-9]+.+[A-z]/
           },
           password: {
             type: String,
             required: true,
-            minLength: 8,
+            minLength: 9,
             maxLength: 20,
-            match: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/,
-          
-            validate: {
-              validator: function(v) {
-                // custom validator to check password strength
-                return v !== this.username; // password should not be same as username
-              },
-              message: props => `${props.value} should not be the same as the username`
-            }}
+            match: /^(?=.*[0-9])(?=.*[!@#$%*])(?=.*[A-Z])([a-zA-Z0-9!@#$%*]{9,20})$/,
+          }
         },
         { timestamps: true }
       )
