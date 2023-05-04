@@ -18,19 +18,19 @@ exports.addCheckout = (req, res) => {
       res.send(data);
     })
     .catch((err) => {
-      res.status(500).send({
+      res.status(404).send({
         message: err.message || "Some error occurred while creating the checkout.",
       });
     });
 };
 
 exports.getAllCheckouts = (req, res) => {
-    Checkout.find()
+    Checkout.find(req.query)
     .then((data) => {
       res.send(data);
     })
     .catch((err) => {
-      res.status(500).send({
+      res.status(404).send({
         message: err.message || "Some error occurred while retrieving checkout.",
       });
     });
@@ -45,13 +45,13 @@ exports.findCheckoutById = (req, res) => {
       else res.send(data);
     })
     .catch((err) => {
-      res.status(500).send({ message: "Error retrieving checkout with id=" + id });
+      res.status(404).send({ message: "Error retrieving checkout with id=" + id });
     });
 };
 
 exports.updateCheckoutById = (req, res) => {
   if (!req.body) {
-    return res.status(400).send({
+    return res.status(404).send({
       message: "Data to update cannot be empty!",
     });
   }
@@ -67,7 +67,7 @@ exports.updateCheckoutById = (req, res) => {
       } else res.send({ message: "Checkout was updated successfully." });
     })
     .catch((err) => {
-      res.status(500).send({
+      res.status(404).send({
         message: "Error updating checkout with id=" + id,
       });
     });

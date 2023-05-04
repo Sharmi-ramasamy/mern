@@ -17,27 +17,19 @@ exports.addProduct = (req, res) => {
       res.send(data);
     })
     .catch((err) => {
-      res.status(500).send({
+      res.status(404).send({
         message: err.message || "Some error occurred while creating the product.",
       });
     });
 };
 
 exports.findAllProduct = (req, res) => {
-   Product.find()
+   Product.find(req.query)
     .then((data) => {
-      const filters = req.query;
-      const filteredProducts = data.filter(product => {
-        let values = true ;
-        for(key in filters) {
-          values = values && product[key] == filters[key]
-        }
-        return values
-      })
-      res.send(filteredProducts);
+      res.send(data);
     })
     .catch((err) => {
-      res.status(500).send({
+      res.status(404).send({
         message: err.message || "Some error occurred while retrieving product.",
       });
     });
@@ -52,13 +44,13 @@ exports.findProductById = (req, res) => {
       else res.send(data);
     })
     .catch((err) => {
-      res.status(500).send({ message: "Error retrieving product with id=" + id });
+      res.status(404).send({ message: "Error retrieving product with id=" + id });
     });
 };
 
 exports.updateProductById = (req, res) => {
   if (!req.body) {
-    return res.status(400).send({
+    return res.status(404).send({
       message: "Data to update cannot be empty!",
     });
   }
@@ -74,7 +66,7 @@ exports.updateProductById = (req, res) => {
       } else res.send({ message: "Product was updated successfully." });
     })
     .catch((err) => {
-      res.status(500).send({
+      res.status(404).send({
         message: "Error updating product with id=" + id,
       });
     });
@@ -96,7 +88,7 @@ exports.deleteProductById = (req, res) => {
       }
     })
     .catch((err) => {
-      res.status(500).send({
+      res.status(404).send({
         message: "Could not delete product with id=" + id,
       });
     });
@@ -110,7 +102,7 @@ exports.deleteAllProducts = (req, res) => {
       });
     })
     .catch((err) => {
-      res.status(500).send({
+      res.status(404).send({
         message: err.message || "Some error occurred while removing all products.",
       });
     });

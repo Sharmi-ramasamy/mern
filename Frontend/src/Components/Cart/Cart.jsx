@@ -19,7 +19,8 @@ export const Cart = () => {
 };
 
   const loadData = async () => {
-    const response = await ecomUrl.get("cart",{headers})
+    const email = sessionStorage.getItem("email")
+    const response = await ecomUrl.get("cart/"+email,{headers})
     .catch ((e) => {
       Toast("Please login to view the Cart...!!", "error")
       navigate('/');
@@ -74,11 +75,6 @@ export const Cart = () => {
 
   const clearCart = () => {
     getProduct
-      .filter((e) => {
-        if (sessionStorage.getItem("email") === e.email) {
-          return e;
-        }
-      })
       .map((e) => {
         ecomUrl.delete("cart/" + e._id);
       });
@@ -87,11 +83,8 @@ export const Cart = () => {
     }, 100);
   };
 
-  const totalPrice = getProduct.filter((e)  => {
-    if (sessionStorage.getItem("email") === e.email) {
-      return e;
-    }
-  }).reduce((price, value) => price + value.price * value.quantity, 0);
+  const totalPrice = getProduct
+  .reduce((price, value) => price + value.price * value.quantity, 0);
   return (
     <>
       <div className="cart-items">
@@ -109,11 +102,6 @@ export const Cart = () => {
 
         <div>
           {getProduct
-            .filter((e) => {
-              if (sessionStorage.getItem("email") === e.email) {
-                return e;
-              }
-            })
             .map((value) => (
               <div key={value._id} className="cart-items-list">
                 <img className="cart-items-image" src={value.image} alt={value.name} />

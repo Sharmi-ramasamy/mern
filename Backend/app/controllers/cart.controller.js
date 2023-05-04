@@ -21,27 +21,20 @@ exports.addCart = (req, res) => {
       res.send(data);
     })
     .catch((err) => {
-      res.status(500).send({
+      res.status(404).send({
         message: err.message || "Some error occurred while creating the cart.",
       });
     });
 };
 
 exports.getCartItems = (req, res) => {
-  Cart.find()
+  const email = req.params.email
+  Cart.find({email:email})
     .then((data) => {
-      const filters = req.query;
-      const filteredCart = data.filter(product => {
-        let values = true;
-        for(key in filters) {
-          values = values && product[key] == filters[key]
-        }
-         return values
-      })
-      res.send(filteredCart);
+      res.send(data);
     })
     .catch((err) => {
-      res.status(500).send({
+      res.status(404).send({
         message: err.message || "Some error occurred while retrieving cart.",
       });
     });
@@ -56,13 +49,13 @@ exports.getCartItemsById = (req, res) => {
       else res.send(data);
     })
     .catch((err) => {
-      res.status(500).send({ message: "Error retrieving cart with id=" + id });
+      res.status(404).send({ message: "Error retrieving cart with id=" + id });
     });
 };
 
 exports.updateCartById = (req, res) => {
   if (!req.body) {
-    return res.status(400).send({
+    return res.status(404).send({
       message: "Data to update cannot be empty!",
     });
   }
@@ -78,7 +71,7 @@ exports.updateCartById = (req, res) => {
       } else res.send({ message: "Cart was updated successfully." });
     })
     .catch((err) => {
-      res.status(500).send({
+      res.status(404).send({
         message: "Error updating cart with id=" + id,
       });
     });
@@ -100,7 +93,7 @@ exports.deleteCartById = (req, res) => {
       }
     })
     .catch((err) => {
-      res.status(500).send({
+      res.status(404).send({
         message: "Could not delete cart with id=" + id,
       });
     });
@@ -114,7 +107,7 @@ exports.deleteAllCartItems = (req, res) => {
       });
     })
     .catch((err) => {
-      res.status(500).send({
+      res.status(404).send({
         message: err.message || "Some error occurred while removing all carts.",
       });
     });

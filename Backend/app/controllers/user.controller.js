@@ -14,19 +14,19 @@ exports.userSignup = (req, res) => {
       res.send(data);
     })
     .catch((err) => {
-      res.status(500).send({
+      res.status(404).send({
         message: err.message || "Some error occurred while creating the users.",
       });
     });
 };
 
 exports.getAllUsers = (req, res) => {
-   User.find()
+   User.find(req.query)
     .then((data) => {
       res.send(data);
     })
     .catch((err) => {
-      res.status(500).send({
+      res.status(404).send({
         message: err.message || "Some error occurred while retrieving users.",
       });
     });
@@ -41,14 +41,14 @@ exports.findUserById = (req, res) => {
       else res.send(data);
     })
     .catch((err) => {
-      res.status(500).send({ message: "Error retrieving user with id=" + id });
+      res.status(404).send({ message: "Error retrieving user with id=" + id });
     });
 };
 
 
 exports.updateuserById = (req, res) => {
   if (!req.body) {
-    return res.status(400).send({
+    return res.status(404).send({
       message: "Data to update cannot be empty!",
     });
   }
@@ -64,7 +64,7 @@ exports.updateuserById = (req, res) => {
       } else res.send({ message: "User was updated successfully." });
     })
     .catch((err) => {
-      res.status(500).send({
+      res.status(404).send({
         message: "Error updating user with id=" + id,
       });
     });
@@ -86,7 +86,7 @@ exports.deleteUserById = (req, res) => {
       }
     })
     .catch((err) => {
-      res.status(500).send({
+      res.status(404).send({
         message: "Could not delete user with id=" + id,
       });
     });
@@ -100,7 +100,7 @@ exports.deleteAllUsers = (req, res) => {
       });
     })
     .catch((err) => {
-      res.status(500).send({
+      res.status(404).send({
         message: err.message || "Some error occurred while removing all user.",
       });
     });

@@ -11,7 +11,7 @@ exports.addCategory = async (req, res) => {
     const data = await category.save();
     res.send(data);
   } catch (err) {
-    res.status(500).send({
+    res.status(404).send({
       message: err.message || "Some error occurred while creating the category.",
     });
   }
@@ -20,18 +20,10 @@ exports.addCategory = async (req, res) => {
 
 exports.findAllCategory = async (req, res) => {
   try {
-    const data = await Category.find();
-    const filters = req.query;
-    const filteredCategory = data.filter(product => {
-      let values = true;
-      for (key in filters) {
-        values = values && product[key] == filters[key]
-      }
-      return values
-    });
-    res.send(filteredCategory);
+    const data = await Category.find(req.query);
+    res.send(data);
   } catch (err) {
-    res.status(500).send({
+    res.status(404).send({
       message: err.message || "Some error occurred while retrieving category.",
     });
   }
@@ -49,7 +41,7 @@ exports.findCategoryById = async (req, res) => {
       res.send(data);
     }
   } catch (err) {
-    res.status(500).send({ message: "Error retrieving category with id=" + id });
+    res.status(404).send({ message: "Error retrieving category with id=" + id });
   }
 };
 
@@ -57,7 +49,7 @@ exports.findCategoryById = async (req, res) => {
 exports.updateategoryById = async (req, res) => {
   try {
     if (!req.body) {
-      return res.status(400).send({
+      return res.status(404).send({
         message: "Data to update can not be empty!",
       });
     }
@@ -73,7 +65,7 @@ exports.updateategoryById = async (req, res) => {
       res.send({ message: "Category was updated successfully." });
     }
   } catch (err) {
-    res.status(500).send({
+    res.status(404).send({
       message: "Error updating category with id=" + id,
     });
   }
@@ -95,7 +87,7 @@ exports.deleteCategoryById = async (req, res) => {
       });
     }
   } catch (err) {
-    res.status(500).send({
+    res.status(404).send({
       message: "Could not delete category with id=" + id,
     });
   }
@@ -109,7 +101,7 @@ exports.deleteAllCategory = async (req, res) => {
       message: `${data.deletedCount} Category were deleted successfully!`,
     });
   } catch (err) {
-    res.status(500).send({
+    res.status(404).send({
       message: err.message || "Some error occurred while removing all category.",
     });
   }

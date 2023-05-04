@@ -8,7 +8,7 @@ function authenticate(req,res,next){
         if(err) {
             res.status(401).send("Unauthorized");
         }
-        else{
+        else {
         next()
         }
     })

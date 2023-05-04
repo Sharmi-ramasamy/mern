@@ -3,9 +3,9 @@ module.exports = (app) => {
     var router = require("express").Router();
     const authToken = require("../utils/auth.js")
     router.post("/", cart.addCart);
-    router.get("/", authToken,cart.getCartItems);
+    router.get("/:email", authToken,cart.getCartItems);
     router.get("/:id", cart.getCartItemsById);
-    router.put("/:id", cart.updateCartById);
+    router.put("/:id",cart.updateCartById);
     router.delete("/:id", cart.deleteCartById);
     router.delete("/", cart.deleteAllCartItems);
     app.use("/cart", router);

@@ -14,28 +14,19 @@ exports.addSubcategory = (req, res) => {
       res.send(data);
     })
     .catch((err) => {
-      res.status(500).send({
+      res.status(404).send({
         message: err.message || "Some error occurred while creating the subcategory.",
       });
     });
 };
 
 exports.findAllSubcategory = (req, res) => {
-  // console.log(req.headers.authorization)
-    SubCategory.find()
+    SubCategory.find(req.query)
     .then((data) => {
-      const filters = req.query;
-      const filteredSubcategory = data.filter(product => {
-        let values = true ;
-        for(key in filters) {
-          values = values && product[key] == filters[key]
-        }
-        return values
-      })
-      res.send(filteredSubcategory);
+      res.send(data);
     })
     .catch((err) => {
-      res.status(500).send({
+      res.status(404).send({
         message: err.message || "Some error occurred while retrieving subcategory.",
       });
     });
@@ -50,13 +41,13 @@ exports.findSubcategoryById = (req, res) => {
       else res.send(data);
     })
     .catch((err) => {
-      res.status(500).send({ message: "Error retrieving subcategory with id=" + id });
+      res.status(404).send({ message: "Error retrieving subcategory with id=" + id });
     });
 };
 
 exports.updateSubcategoryById = (req, res) => {
   if (!req.body) {
-    return res.status(400).send({
+    return res.status(404).send({
       message: "Data to update can not be empty!",
     });
   }
@@ -72,7 +63,7 @@ exports.updateSubcategoryById = (req, res) => {
       } else res.send({ message: "SubCategory was updated successfully." });
     })
     .catch((err) => {
-      res.status(500).send({
+      res.status(404).send({
         message: "Error updating subcategory with id=" + id,
       });
     });
@@ -94,7 +85,7 @@ exports.deleteSubcategoryById = (req, res) => {
       }
     })
     .catch((err) => {
-      res.status(500).send({
+      res.status(404).send({
         message: "Could not delete subcategory with id=" + id,
       });
     });
@@ -108,7 +99,7 @@ exports.deleteAllSubcategory = (req, res) => {
       });
     })
     .catch((err) => {
-      res.status(500).send({
+      res.status(404).send({
         message: err.message || "Some error occurred while removing all category.",
       });
     });

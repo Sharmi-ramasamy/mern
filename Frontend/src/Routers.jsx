@@ -8,6 +8,7 @@ import { Checkout } from "./Components/Checkout/Checkout";
 import { Successpage } from "./Components/Checkout/Successpage";
 import { Error } from "./Components/Error/Error";
 import { Navbar } from "./Components/Navbar/Navbar";
+import { Product } from "./Components/SubCategory/Product";
 import { SubCategory } from "./Components/SubCategory/SubCategory";
 import Home from "./Pages/Homepage/Home";
 import Login from "./Pages/Login/Login";
@@ -39,6 +40,7 @@ export const Routing = () => {
         <Route path="/checkout" element={<Checkout />} />
         <Route path="/successpage" element={<Successpage />} />
         <Route path="/signup" element={<Signup />} />
+        {/* <Route path="/:subcat" element={<Product/>} />  */}
       </Routes>
     </>
   );
