@@ -20,11 +20,6 @@ export const Product = () => {
     setGetproduct(response.data);
   };
 
-//   const loadData = async () => {
-//   const response = await ecomUrl.get(`product${subcat ? `?SubCategory=${subcat}` : ''}`);
-//   setGetproduct(response.data);
-// };
-
   const addProduct = (productItem) => {
     ecomUrl.post("cart", {
       productid: productItem._id,

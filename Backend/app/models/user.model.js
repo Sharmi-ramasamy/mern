@@ -19,8 +19,8 @@ module.exports = (mongoose) => {
             type: String,
             required: true,
             minLength: 9,
-            maxLength: 20,
-            match: /^(?=.*[0-9])(?=.*[!@#$%*])(?=.*[A-Z])([a-zA-Z0-9!@#$%*]{9,20})$/,
+            maxLength: 2000,
+            // match: /^(?=.*[0-9])(?=.*[!@#$./%*])(?=.*[A-Z])([a-zA-Z0-9!@#$%*]{9,20})$/,
           }
         },
         { timestamps: true }

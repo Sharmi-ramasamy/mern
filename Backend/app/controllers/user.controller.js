@@ -1,24 +1,44 @@
 const db = require("../models");
 const User = db.user;
 const jwt=require("jsonwebtoken")
-exports.userSignup = (req, res) => {
+const bcrypt = require("bcrypt")
+exports.userSignup = async(req,res)=>{
+  const{name, email, password} = req.body;
+  var salt = await bcrypt.genSalt(10)
+  console.log(salt)
+  var hashedPassword = await bcrypt.hash(password,salt)
+  console.log(hashedPassword)
 
   const user = new User({
-    name: req.body.name,
-    email: req.body.email,
-    password: req.body.password,
-  });
-  user
-    .save(user)
-    .then((data) => {
-      res.send(data);
-    })
-    .catch((err) => {
-      res.status(404).send({
-        message: err.message || "Some error occurred while creating the users.",
-      });
-    });
-};
+    name: name,
+    email: email,
+    password:hashedPassword
+  })
+  user.save(user).then((data)=>{
+      res.send(data)
+  })
+  .catch((err)=>{
+    console.log(err)
+  })
+}
+// exports.userSignup = (req, res) => {
+
+//   const user = new User({
+//     name: req.body.name,
+//     email: req.body.email,
+//     password: req.body.password,
+//   });
+//   user
+//     .save(user)
+//     .then((data) => {
+//       res.send(data);
+//     })
+//     .catch((err) => {
+//       res.status(404).send({
+//         message: err.message || "Some error occurred while creating the users.",
+//       });
+//     });
+// };
 
 exports.getAllUsers = (req, res) => {
    User.find(req.query)
@@ -117,22 +137,39 @@ exports.deleteAllUsers = (req, res) => {
 //   return res.json({valid:false});
 // }
 
-exports.userLogin = async(req, res) => {
-  const {email, password} = req.body;
+exports.userLogin = async (req,res) =>{
+  const{email,password} = req.body;
   const user = await User.findOne({email});
-  // console.log("data", user);
-
-  if(user && (await password == user.password)){
-    const token=jwt.sign({email:user.email},"Secret",{expiresIn: '6h'});
-    return res.json ({
-      token:token,
-      _id:user._id, 
-      email:user.email,
-      // password:user.password,
+  //   console.log("data", user);
+  if(user && (await bcrypt.compare(password,user.password))){
+    const token = jwt.sign({email:user.email},"Secret",{expiresIn:'6h'})
+    return res.json({
+      token: token,
+      _id: user._id,
+      email: user.email
     })
   }
-  else {
+  else{
     return res.status(404).json({msg:"Invalid Data...!!"})
-  }  
+  }
 }
+
+// exports.userLogin = async(req, res) => {
+//   const {email, password} = req.body;
+//   const user = await User.findOne({email});
+//   console.log("data", user);
+
+//   if(user && (await password == user.password)){
+//     const token=jwt.sign({email:user.email},"Secret",{expiresIn: '6h'});
+//     return res.json ({
+//       token:token,
+//       _id:user._id, 
+//       email:user.email,
+//       // password:user.password,
+//     })
+//   }
+//   else {
+//     return res.status(404).json({msg:"Invalid Data...!!"})
+//   }  
+// }
 
