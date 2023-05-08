@@ -3,18 +3,18 @@ module.exports = (mongoose) => {
     "category",
     mongoose.Schema(
       {
-        name : {
+        name: {
           type: String,
-          required: true,
+          required: true
         },
-        image : {
+        image: {
           type: String,
-          required: true,
+          required: true
         }
       },
       { timestamps: true }
     )
-  );
+  )
 
-  return Category;
-};
+  return Category
+}

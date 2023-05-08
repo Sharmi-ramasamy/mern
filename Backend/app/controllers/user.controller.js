@@ -1,25 +1,25 @@
-const db = require("../models");
-const User = db.user;
-const jwt=require("jsonwebtoken")
+const db = require("../models")
+const User = db.user
+const jwt = require("jsonwebtoken")
 const bcrypt = require("bcrypt")
-exports.userSignup = async(req,res)=>{
-  const{name, email, password} = req.body;
-  var salt = await bcrypt.genSalt(10)
+exports.userSignup = async (req, res) => {
+  const { name, email, password } = req.body
+  const salt = await bcrypt.genSalt(10)
   console.log(salt)
-  var hashedPassword = await bcrypt.hash(password,salt)
+  const hashedPassword = await bcrypt.hash(password, salt)
   console.log(hashedPassword)
 
   const user = new User({
-    name: name,
-    email: email,
-    password:hashedPassword
+    name,
+    email,
+    password: hashedPassword
   })
-  user.save(user).then((data)=>{
-      res.send(data)
+  user.save(user).then((data) => {
+    res.send(data)
   })
-  .catch((err)=>{
-    console.log(err)
-  })
+    .catch((err) => {
+      console.log(err)
+    })
 }
 // exports.userSignup = (req, res) => {
 
@@ -41,90 +41,89 @@ exports.userSignup = async(req,res)=>{
 // };
 
 exports.getAllUsers = (req, res) => {
-   User.find(req.query)
+  User.find(req.query)
     .then((data) => {
-      res.send(data);
+      res.send(data)
     })
     .catch((err) => {
       res.status(404).send({
-        message: err.message || "Some error occurred while retrieving users.",
-      });
-    });
-};
+        message: err.message || "Some error occurred while retrieving users."
+      })
+    })
+}
 
 exports.findUserById = (req, res) => {
-  const id = req.params.id;
+  const id = req.params.id
 
   User.findById(id)
     .then((data) => {
-      if (!data) res.status(404).send({ message: "Not found user with id " + id });
-      else res.send(data);
+      if (!data) res.status(404).send({ message: "Not found user with id " + id })
+      else res.send(data)
     })
-    .catch((err) => {
-      res.status(404).send({ message: "Error retrieving user with id=" + id });
-    });
-};
-
+    .catch(() => {
+      res.status(404).send({ message: "Error retrieving user with id=" + id })
+    })
+}
 
 exports.updateuserById = (req, res) => {
   if (!req.body) {
     return res.status(404).send({
-      message: "Data to update cannot be empty!",
-    });
+      message: "Data to update cannot be empty!"
+    })
   }
 
-  const id = req.params.id;
+  const id = req.params.id
 
   User.findByIdAndUpdate(id, req.body, { useFindAndModify: false })
     .then((data) => {
       if (!data) {
         res.status(404).send({
-          message: `Cannot update user with id=${id}. Maybe user was not found!`,
-        });
-      } else res.send({ message: "User was updated successfully." });
+          message: `Cannot update user with id=${id}. Maybe user was not found!`
+        })
+      } else res.send({ message: "User was updated successfully." })
     })
-    .catch((err) => {
+    .catch(() => {
       res.status(404).send({
-        message: "Error updating user with id=" + id,
-      });
-    });
-};
+        message: "Error updating user with id=" + id
+      })
+    })
+}
 
 exports.deleteUserById = (req, res) => {
-  const id = req.params.id;
+  const id = req.params.id
 
   User.findByIdAndRemove(id)
     .then((data) => {
       if (!data) {
         res.status(404).send({
-          message: `Cannot delete user with id=${id}. Maybe user was not found!`,
-        });
+          message: `Cannot delete user with id=${id}. Maybe user was not found!`
+        })
       } else {
         res.send({
-          message: "User was deleted successfully!",
-        });
+          message: "User was deleted successfully!"
+        })
       }
     })
-    .catch((err) => {
+    .catch(() => {
       res.status(404).send({
-        message: "Could not delete user with id=" + id,
-      });
-    });
-};
+        message: "Could not delete user with id=" + id
+      })
+    })
+}
 
 exports.deleteAllUsers = (req, res) => {
   User.deleteMany({})
     .then((data) => {
       res.send({
-        message: `${data.deletedCount} User were deleted successfully!`,
-      });
+        message: `${data.deletedCount} User were deleted successfully!`
+      })
     })
     .catch((err) => {
       res.status(404).send({
-        message: err.message || "Some error occurred while removing all user.",
-      });
-    });
-};
+        message: err.message || "Some error occurred while removing all user."
+      })
+    })
+}
 
 // exports.findByUsername = async (req,res) =>{
 //   const {email, password} = req.query;
@@ -137,20 +136,19 @@ exports.deleteAllUsers = (req, res) => {
 //   return res.json({valid:false});
 // }
 
-exports.userLogin = async (req,res) =>{
-  const{email,password} = req.body;
-  const user = await User.findOne({email});
+exports.userLogin = async (req, res) => {
+  const { email, password } = req.body
+  const user = await User.findOne({ email })
   //   console.log("data", user);
-  if(user && (await bcrypt.compare(password,user.password))){
-    const token = jwt.sign({email:user.email},"Secret",{expiresIn:'6h'})
+  if (user && (await bcrypt.compare(password, user.password))) {
+    const token = jwt.sign({ email: user.email }, "Secret", { expiresIn: "6h" })
     return res.json({
-      token: token,
+      token,
       _id: user._id,
       email: user.email
     })
-  }
-  else{
-    return res.status(404).json({msg:"Invalid Data...!!"})
+  } else {
+    return res.status(404).json({ msg: "Invalid Data...!!" })
   }
 }
 
@@ -163,13 +161,12 @@ exports.userLogin = async (req,res) =>{
 //     const token=jwt.sign({email:user.email},"Secret",{expiresIn: '6h'});
 //     return res.json ({
 //       token:token,
-//       _id:user._id, 
+//       _id:user._id,
 //       email:user.email,
 //       // password:user.password,
 //     })
 //   }
 //   else {
 //     return res.status(404).json({msg:"Invalid Data...!!"})
-//   }  
+//   }
 // }
-
